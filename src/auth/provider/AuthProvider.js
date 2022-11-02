@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginAuthenticator from "../util/LoginAuthenticator";
 
 const AuthContext = createContext(null);
@@ -10,24 +11,40 @@ const useAuth = () => {
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
 
+    const navigate = useNavigate();
+
     const handleRegister = async () => {
     
     }
 
-    const handleLogin = async () => {
-        const token = await LoginAuthenticator();
+    const handleLogin = async (credentials) => {
+        const token = await LoginAuthenticator(credentials);
         setToken(token);
+        navigate('/dashboard')
     }
-
-    const handleLogout = () => {
+    
+    const handleLogout = async () => {
+        // revoke accessToken on the serverside
+        const res = await fetch('http://127.0.0.1:8000/api/logout',{
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + token
+            })
+        });
+    
+        const response = await res.json();
+        console.log("message from server = " + response.message);
+    
+        // clear accesstoken from the localstorage client side
         setToken(null);
+        navigate('/welcome')
     }
 
     const value = {
         token,
-        onRegister: handleRegister,
-        onLogin: handleLogin,
-        onLogout: handleLogout,
+        handleRegister: handleRegister,
+        handleLogin: handleLogin,
+        handleLogout: handleLogout,
     }
 
     return (
