@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../provider/AuthProvider";
+import { Navigator } from '../../Navigator';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -20,6 +21,7 @@ const Login = () => {
     
     return (
         <>
+        <Navigator />
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <label>

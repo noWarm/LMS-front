@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../provider/AuthProvider";
+import { Navigator } from '../../Navigator';
 
 const Register = () => {
     const [credentials, setCredentials] = useState({
@@ -22,6 +23,7 @@ const Register = () => {
     
     return (
         <>
+        <Navigator />
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
             <label>
@@ -38,8 +40,8 @@ const Register = () => {
                 </label>
                 <label>
                     Role:
-                    <input type="radio" name="role" required checked={credentials.role == "Student"} value="Student" onChange={handleChange}/>Student
-                    <input type="radio" name="role" required checked={credentials.role == "Teacher"} value="Teacher" onChange={handleChange}/>Teacher
+                    <input type="radio" name="role" required checked={credentials.role === "Student"} value="Student" onChange={handleChange}/>Student
+                    <input type="radio" name="role" required checked={credentials.role === "Teacher"} value="Teacher" onChange={handleChange}/>Teacher
                 </label>
                 <input type="submit" value="Register" />
             </form>

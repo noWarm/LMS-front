@@ -1,7 +1,11 @@
+import { Navigator } from './Navigator';
+
 const Welcome = () => {
     return (
         <>
-            Welcome
+            <Navigator />
+            <h1>Welcome</h1>
+            
         </>
     );
 };

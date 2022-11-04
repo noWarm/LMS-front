@@ -31,8 +31,7 @@ const AuthProvider = ({ children }) => {
         } catch (e) {
             console.error(e);
         }
-    
-    }
+    };
 
     const handleLogin = async (credentials) => {
         try {
@@ -49,13 +48,17 @@ const AuthProvider = ({ children }) => {
             
             const responseData = await response.json();
             setToken(responseData.accessToken);
+            
+
+            
             navigate('/dashboard')
+
+
         
         } catch (e) {
             console.error(e);
         }
-        
-    }
+    };
     
     const handleLogout = async () => {
         // revoke accessToken on the serverside
@@ -72,20 +75,20 @@ const AuthProvider = ({ children }) => {
         // clear accesstoken from the localstorage client side
         setToken(null);
         navigate('/welcome')
-    }
+    };
 
     const value = {
         token,
         handleRegister: handleRegister,
         handleLogin: handleLogin,
         handleLogout: handleLogout,
-    }
+    };
 
     return (
         <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )
-}
+};
 
-export { useAuth, AuthProvider }
+export { useAuth, AuthProvider };
