@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { useAuth } from "../provider/AuthProvider";
-import { Navigator } from '../../Navigator';
+import Header from "./Header";
 
-const Login = () => {
+function Login({  token, handleLogin }) {
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",
     });
-
-    const { handleLogin } = useAuth();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -21,7 +18,7 @@ const Login = () => {
     
     return (
         <>
-        <Navigator />
+            <Header />
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -36,6 +33,6 @@ const Login = () => {
             </form>
         </>
     );
-};
+}
 
-export { Login };
+export default Login;

@@ -1,22 +1,19 @@
-import { NavLink } from "react-router-dom"
-import { useAuth } from "./auth/provider/AuthProvider";
-import SignedInAs from "./SignedInAs";
 
-const Navigator = () => {
-    const { token, handleLogout } =  useAuth();
+import { NavLink } from "react-router-dom"
+
+const Navigator = ({ token, handleLogout }) => {
+
     return (
         <nav>
-            <NavLink to="/welcome">welcome</NavLink>
-            {(  !token && 
-                <>
+            {(
+                !token && <>
                     <NavLink to="/register">register</NavLink>
                     <NavLink to="/login">login</NavLink>
                 </>
             )}
             {(
-                token &&
-                <>
-                    <SignedInAs />
+                token && <>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                     <button onClick={handleLogout}>logout</button>
                 </>
             )}
@@ -24,4 +21,4 @@ const Navigator = () => {
     )
 };
 
-export { Navigator };
+export default Navigator;

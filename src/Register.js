@@ -1,16 +1,13 @@
 import { useState } from "react";
-import { useAuth } from "../provider/AuthProvider";
-import { Navigator } from '../../Navigator';
+import Header from "./Header";
 
-const Register = () => {
+function Register({token, handleRegister, handleLogout}) {
     const [credentials, setCredentials] = useState({
         name: "",
         email: "",
         password: "",
         role: "Student",
     });
-
-    const { handleRegister } = useAuth();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -20,11 +17,12 @@ const Register = () => {
     const handleChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value });
     };
-    
-    return (
+
+    return(
         <>
-        <Navigator />
+            <Header token={token} handleLogout={handleLogout}/>
             <h1>Register</h1>
+
             <form onSubmit={handleSubmit}>
             <label>
                     Name:
@@ -47,6 +45,6 @@ const Register = () => {
             </form>
         </>
     );
-};
+}
 
-export { Register };
+export default Register;

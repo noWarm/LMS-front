@@ -1,12 +1,14 @@
-import { Navigator } from './Navigator';
+import Header from "./Header";
 
-const Dashboard = () => {
-    return (
+function Dashboard({ token, handleLogout }) {
+
+    return(
         <>
-            <Navigator />
+            <Header token={token} handleLogout={handleLogout}/>
             <h1>Dashboard</h1>
+            {token}
         </>
     );
-};
+}
 
-export { Dashboard };
+export default Dashboard;
